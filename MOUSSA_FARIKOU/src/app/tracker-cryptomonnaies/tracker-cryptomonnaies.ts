@@ -8,7 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { Crypto } from '../shared/crypto';
 import { CRYPTOS } from '../shared/cryptos';
 import { RouterLink } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 import { CryptoService } from '../services/crypto.service';
+import { PriceService } from '../services/price.service';
 
 @Component({
   imports: [
@@ -31,10 +33,11 @@ export class TrackerCryptomonnaies implements OnInit {
   cryptos: Crypto[] = CRYPTOS;
   selectedCrypto: Crypto = CRYPTOS[0];
 
-  constructor(private cryptoService: CryptoService, @Inject('baseURL') protected baseURL: string = "") { }
+  constructor(private cryptoService: CryptoService, private priceService: PriceService, @Inject('baseURL') protected baseURL: string = "") { }
 
   ngOnInit() {
     this.cryptoService.getCryptos()
+      .pipe(switchMap(cryptos => this.priceService.withLivePrices(cryptos)))
       .subscribe(cryptos => this.cryptos = cryptos);
   }
 

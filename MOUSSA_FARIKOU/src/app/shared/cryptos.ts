@@ -3,6 +3,7 @@ import { Crypto } from './crypto';
 export const CRYPTOS: Crypto[] = [
   {
     id: '0',
+    apiId: 'bitcoin',
     name: 'Bitcoin',
     symbol: 'BTC',
     image: '/images/btc.png',
@@ -13,6 +14,7 @@ export const CRYPTOS: Crypto[] = [
   },
   {
     id: '1',
+    apiId: 'ethereum',
     name: 'Ethereum',
     symbol: 'ETH',
     image: '/images/eth.png',
@@ -23,6 +25,7 @@ export const CRYPTOS: Crypto[] = [
   },
   {
     id: '2',
+    apiId: 'solana',
     name: 'Solana',
     symbol: 'SOL',
     image: '/images/sol.png',
@@ -33,6 +36,7 @@ export const CRYPTOS: Crypto[] = [
   },
   {
     id: '3',
+    apiId: 'cardano',
     name: 'Cardano',
     symbol: 'ADA',
     image: '/images/ada.png',

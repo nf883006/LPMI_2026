@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CryptoService } from '../services/crypto.service';
+import { PriceService } from '../services/price.service';
 import { Crypto } from '../shared/crypto';
 
 @Component({
@@ -31,7 +32,7 @@ export class CryptoDetail implements OnInit {
   prev: string = "";
   next: string = "";
 
-  constructor(private cryptoservice: CryptoService, private route: ActivatedRoute, private location: Location,
+  constructor(private cryptoservice: CryptoService, private priceService: PriceService, private route: ActivatedRoute, private location: Location,
     @Inject('baseURL') protected baseURL: string = "") {
   }
 
@@ -42,7 +43,8 @@ export class CryptoDetail implements OnInit {
       if (this.crypto) { this.setPrevNext(this.crypto.id); }
     });
 
-    this.route.params.pipe(switchMap((params: Params) => this.cryptoservice.getCrypto(params['id'])))
+    this.route.params.pipe(switchMap((params: Params) => this.cryptoservice.getCrypto(params['id'])),
+      switchMap((crypto: Crypto) => this.priceService.withLivePrice(crypto)))
       .subscribe(crypto => { this.crypto = crypto; this.setPrevNext(crypto.id); });
   }
 

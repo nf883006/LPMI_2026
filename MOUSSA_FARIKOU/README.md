@@ -19,6 +19,11 @@ npm run backend
 ng serve --open
 ```
 
+Les **prix en direct** viennent de l'API publique **CoinGecko** (gratuite, sans clé, appelée directement par Angular).
+Si elle ne répond pas, l'application affiche les prix enregistrés dans le serveur JSON (« Prix enregistré »).
+
+Tests automatiques : `ng test --watch=false`
+
 Pages : Accueil (`/home`), À propos (`/aboutus`), Cryptos (`/cryptos`), détail (`/cryptodetail/:id`), Contact (`/contactus`), et la fenêtre Login.
 
 ---
